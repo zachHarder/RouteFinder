@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my map</title>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>my map</h1>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        // map options
+        var options = {
+          zoom: 8,
+          center: { lat: 44.9778, lng: -93.265 },
+        };
+
+        // new map
+        var map = new google.maps.Map(document.getElementById("map"), options);
+
+        //Add Marker
+        // var marker = new google.maps.Marker({
+        //   position: { lat: 45.00939, lng: -93.24503 },
+        //   map: map,
+        // });
+
+        // var infoWindow = new google.maps.InfoWindow({
+        //   content: "<h1>Home</h1>",
+        // });
+
+        // marker.addListener("click", function () {
+        //   infoWindow.open(map, marker);
+        // });
+        //Add Marker Function
+        function addMarker(coords, location) {
+          var marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+          });
+
+          var infoWindow = new google.maps.InfoWindow({
+            content: `<h1>${location}</h1>`,
+          });
+
+          marker.addListener("click", function () {
+            infoWindow.open(map, marker);
+          });
+        }
+        addMarker({ lat: 45.00939, lng: -93.24503 }, `home`);
+        addMarker({ lat: 44.8549, lng: -93.2422 }, `Mall of America`);
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJwdlYIwXuXlEJGOQUpYqrNg8Er_tMBD8&callback=initMap"
+    ></script>
+  </body>
+</html>
