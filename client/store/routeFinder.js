@@ -34,10 +34,18 @@ export const setPinThunk = (address) => {
   };
 };
 
-export default function routesReducer(state, action) {
+const initialState = {
+  coords: {
+    lat: -3.745,
+    lng: -38.523,
+  },
+};
+
+export default function routesReducer(state = initialState, action) {
   switch (action.type) {
     case "SET_PIN":
-      console.log(action.coords);
       return action.coords;
+    default:
+      return state;
   }
 }
