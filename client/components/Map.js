@@ -1,10 +1,30 @@
 import React from "react";
-import { GoogleMap, withScriptjs, withGoogleMap } from "@react-google-maps/api";
+import { compose, withProps } from "recompose";
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from "react-google-maps";
 
-function Map() {
-  return (
-    <GoogleMap defaultZoom={10} defaultCenter={{ lat: -3.745, lng: -38.523 }} />
-  );
-}
-
-export const WrappedMap = withScriptjs(withGoogleMap(Map));
+export const MyMapComponent = compose(
+  withProps({
+    googleMapURL:
+      "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAJwdlYIwXuXlEJGOQUpYqrNg8Er_tMBD8",
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `400px` }} />,
+    mapElement: <div style={{ height: `100%` }} />,
+  }),
+  withScriptjs,
+  withGoogleMap
+)((props) => (
+  <GoogleMap defaultZoom={8} defaultCenter={{ lat: 44.9778, lng: -93.265 }}>
+    {props.isMarkerShown && (
+      <Marker
+        position={{ lat: 44.9778, lng: -93.265 }}
+        onClick={props.onMarkerClick}
+        // onChange={props.onMarkerChange}
+      />
+    )}
+  </GoogleMap>
+));

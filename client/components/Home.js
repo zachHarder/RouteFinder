@@ -2,24 +2,41 @@ import React from "react";
 // import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { connect } from "react-redux";
 // import { ParamsForm } from "./ParamsForm";
-import { WrappedMap } from "./Map";
+import { MyMapComponent } from "./Map";
 
 /**
  * COMPONENT
  */
-export function Home(props) {
-  return (
-    <div>
-      <WrappedMap
-        googleMapURL={
-          "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-        }
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
+class Home extends React.PureComponent {
+  state = {
+    isMarkerShown: false,
+    position: { lat: 44.9778, lng: -93.265 },
+  };
+
+  componentDidMount() {
+    this.delayedShowMarker();
+  }
+
+  delayedShowMarker = () => {
+    setTimeout(() => {
+      this.setState({ isMarkerShown: true });
+    }, 3000);
+  };
+
+  handleMarkerClick = () => {
+    this.setState({ isMarkerShown: false });
+    this.delayedShowMarker();
+  };
+
+  render() {
+    return (
+      <MyMapComponent
+        isMarkerShown={this.state.isMarkerShown}
+        onMarkerClick={this.handleMarkerClick}
+        // onMarkerChange={this.handleMarkerChange}
       />
-    </div>
-  );
+    );
+  }
 }
 
 /**
