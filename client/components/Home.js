@@ -27,7 +27,7 @@ class Home extends React.PureComponent {
   delayedShowMarker = () => {
     setTimeout(() => {
       this.setState({ isMarkerShown: true });
-    }, 3000);
+    }, 2000);
   };
 
   handleMarkerClick = () => {
@@ -52,7 +52,7 @@ class Home extends React.PureComponent {
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}
           originMarker={{ lat: this.state.lat, lng: this.state.lng }}
-          destinationMarker={{ lat: this.state.latnew, lng: this.state.lng }}
+          destinationMarker={{ lat: this.state.latnew, lng: this.state.lngnew }}
         />
         <form>
           Origin
