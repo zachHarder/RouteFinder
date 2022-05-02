@@ -14,6 +14,8 @@ class Home extends React.PureComponent {
       isMarkerShown: false,
       lat: 44.9778,
       lng: -93.265,
+      latnew: 43.9778,
+      lngnew: -94.265,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -49,9 +51,11 @@ class Home extends React.PureComponent {
         <MyMapComponent
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}
-          positionMarker={{ lat: this.state.lat, lng: this.state.lng }}
+          originMarker={{ lat: this.state.lat, lng: this.state.lng }}
+          destinationMarker={{ lat: this.state.latnew, lng: this.state.lng }}
         />
-        <form onSubmit={this.handleSubmit}>
+        <form>
+          Origin
           <label>
             Lat:
             <input
@@ -72,8 +76,33 @@ class Home extends React.PureComponent {
               onChange={this.handleChange}
             />
           </label>
-          <button type="submit">Submit</button>
         </form>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            Destination
+            <label>
+              Lat:
+              <input
+                value={this.state.latnew}
+                type="number"
+                name="latnew"
+                placeholder="type here"
+                onChange={this.handleChange}
+              />
+            </label>
+            <label>
+              Long:
+              <input
+                value={this.state.lngnew}
+                type="number"
+                name="lngnew"
+                placeholder="type here"
+                onChange={this.handleChange}
+              />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
       </div>
     );
   }
