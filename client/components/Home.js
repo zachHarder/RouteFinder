@@ -2,7 +2,7 @@ import React from "react";
 // import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { connect } from "react-redux";
 // import { ParamsForm } from "./ParamsForm";
-import { MapWithADirectionsRenderer } from "./Map";
+import { WrappedMap } from "./Map";
 
 /**
  * COMPONENT
@@ -10,7 +10,14 @@ import { MapWithADirectionsRenderer } from "./Map";
 export function Home(props) {
   return (
     <div>
-      <MapWithADirectionsRenderer />
+      <WrappedMap
+        googleMapURL={
+          "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+        }
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `400px` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
     </div>
   );
 }
