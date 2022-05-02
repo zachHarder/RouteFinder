@@ -8,23 +8,28 @@ const containerStyle = {
   height: "400px",
 };
 
-const center = {
-  lat: -3.745,
-  lng: -38.523,
-};
-
 /**
  * COMPONENT
  */
+
 export const Home = (props) => {
+  console.log("home props", props);
+
   const { username } = props;
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyAJwdlYIwXuXlEJGOQUpYqrNg8Er_tMBD8",
   });
 
+  const center = {
+    lat: props.coords.lat,
+    lng: props.coords.lng,
+  };
+
   const [map, setMap] = React.useState(null);
 
+  // initMap
   const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
@@ -57,10 +62,11 @@ export const Home = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapStateToProps = (state) => {
   return {
     username: state.auth.username,
+    coords: state.route.coords,
   };
 };
 
-export default connect(mapState)(Home);
+export default connect(mapStateToProps)(Home);
