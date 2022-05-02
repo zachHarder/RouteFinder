@@ -51,7 +51,8 @@ class Home extends React.PureComponent {
           onMarkerClick={this.handleMarkerClick}
           positionMarker={{ lat: this.state.lat, lng: this.state.lng }}
         />
-        <form onSubmit={this.handleSubmit}>
+        <form>
+          Origin
           <label>
             Lat:
             <input
@@ -72,7 +73,6 @@ class Home extends React.PureComponent {
               onChange={this.handleChange}
             />
           </label>
-          <button type="submit">Submit</button>
         </form>
       </div>
     );
